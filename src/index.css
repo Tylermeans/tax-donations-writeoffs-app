@@ -1,1 +1,52 @@
 @import "tailwindcss";
+
+/**
+ * Brand theme tokens for the Donation Itemizer.
+ *
+ * Warm blues/greens palette (D-07) using OKLCH for perceptually uniform scaling.
+ * - brand-*: primary brand blue-teal (used for header, links, interactive elements)
+ * - accent-*: green accent (used for positive actions like "add", "export")
+ * - warm-*: off-white warm backgrounds (page background, card surfaces)
+ *
+ * These tokens map to Tailwind utility classes:
+ *   bg-brand-600, text-brand-100, border-brand-200, etc.
+ */
+@theme {
+  --color-brand-50: oklch(0.97 0.01 220);
+  --color-brand-100: oklch(0.93 0.02 220);
+  --color-brand-200: oklch(0.87 0.04 220);
+  --color-brand-300: oklch(0.78 0.06 210);
+  --color-brand-400: oklch(0.68 0.08 205);
+  --color-brand-500: oklch(0.58 0.10 200);
+  --color-brand-600: oklch(0.50 0.11 200);
+  --color-brand-700: oklch(0.42 0.10 200);
+  --color-brand-800: oklch(0.35 0.08 200);
+  --color-brand-900: oklch(0.28 0.06 200);
+  --color-accent-400: oklch(0.72 0.12 155);
+  --color-accent-500: oklch(0.62 0.14 155);
+  --color-accent-600: oklch(0.52 0.13 155);
+  --color-warm-50: oklch(0.98 0.005 80);
+  --color-warm-100: oklch(0.96 0.01 80);
+}
+
+/**
+ * Global focus styles — real focus rings per CLAUDE.md accessibility requirements.
+ * Using :focus-visible so keyboard users see rings but mouse clicks do not show them.
+ */
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px oklch(0.58 0.10 200); /* brand-500 */
+}
+
+/**
+ * Reduced motion — wrap all transitions in this query per CLAUDE.md.
+ * Default: no transitions. Transitions only activate when user has NOT
+ * requested reduced motion.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .transition-colors {
+    transition-property: color, background-color, border-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+}
