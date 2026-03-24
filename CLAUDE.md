@@ -17,7 +17,8 @@ Domain  : [yourapp.com]
 - `agent_docs/tools_setup.md`       — Stitch MCP, Nano Banana 2, SEO, UI UX Pro Max, Context7, claude-mem, code review
 - `agent_docs/seo_rules.md`         — SEO commands, schema requirements, Core Web Vitals targets
 - `agent_docs/stack_conventions.md` — Stack patterns, file structure, naming conventions
-- `agent_docs/ralph_workflow.md`    — Autonomous dev loop (optional, for unattended builds)
+- `agent_docs/ralph_workflow.md`    — Autonomous dev loop + Ruflo multi-agent swarms
+- `agent_docs/remote_control.md`    — Cowork Dispatch, Claude Code Channels (Telegram/Discord), background worker dispatch
 
 Read only the docs relevant to your current task. Do not read all of them upfront.
 

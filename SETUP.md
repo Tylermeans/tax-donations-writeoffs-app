@@ -91,7 +91,12 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "[your product type]" \
 /plugin marketplace add anthropics/claude-code
 /plugin install code-review@anthropics-claude-code
 
-# 4. Restart Claude Code after installing plugins
+# 5. Install Claude Code Channels (Telegram/Discord remote control)
+/plugin marketplace add anthropics/claude-plugins-official
+/plugin install telegram@claude-plugins-official
+# Then: brew install bun (if on mac) or https://bun.sh
+
+# 6. Restart Claude Code after installing plugins
 ```
 
 ---
@@ -141,3 +146,6 @@ See `agent_docs/ralph_workflow.md` for full details.
 | Context7 | https://github.com/upstash/context7 |
 | claude-mem | https://github.com/thedotmack/claude-mem |
 | Ralph | https://github.com/frankbria/ralph-claude-code |
+| Claude Code Channels | https://code.claude.com/docs/en/channels |
+| Cowork Dispatch | https://support.claude.com/en/articles/13947068-assign-tasks-to-claude-from-anywhere-in-cowork |
+| bassimeledath/dispatch | https://github.com/bassimeledath/dispatch |
