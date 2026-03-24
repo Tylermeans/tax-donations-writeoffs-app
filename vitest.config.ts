@@ -6,6 +6,12 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    // jsdom requires a URL for localStorage/sessionStorage to work
+    environmentOptions: {
+      jsdom: {
+        url: 'http://localhost/',
+      },
+    },
     setupFiles: [],
   },
 })
