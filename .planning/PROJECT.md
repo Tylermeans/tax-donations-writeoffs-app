@@ -12,13 +12,16 @@ Users can quickly and accurately total the fair market value of their donated it
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ Current tax year (2025) with data structure that supports future year updates — Validated in Phase 1: Foundation
+- ✓ Responsive design (375px → 1440px) — Validated in Phase 1: Foundation
+- ✓ Accessible (WCAG AA) — Validated in Phase 1: Foundation
+- ✓ Hardcoded FMV values from Salvation Army valuation guide with low/mid/high ranges per condition — Validated in Phase 1: Foundation
+- ✓ No account or authentication required — fully client-side — Validated in Phase 1: Foundation
 
 ### Active
 
 - [ ] Multi-date donation log (unlimited donation events, each with date + organization)
 - [ ] Searchable item catalog covering clothing, furniture, electronics, sporting goods, household, books/media/toys, instruments
-- [ ] Hardcoded FMV values from Salvation Army/Goodwill valuation guides with low/mid/high ranges
 - [ ] FMV range slider/picker — user adjusts within range, app suggests average as default
 - [ ] Condition toggle per item (Poor / Good / Excellent) affecting FMV multiplier
 - [ ] Quantity editor with inline +/- controls and bulk entry
@@ -28,9 +31,6 @@ Users can quickly and accurately total the fair market value of their donated it
 - [ ] PDF export matching IRS non-cash contribution format with donor info, org name, dates, items, FMV, totals
 - [ ] Form 8283 field reference callouts in export
 - [ ] localStorage persistence — donation data survives browser close
-- [ ] Current tax year (2025) with data structure that supports future year updates
-- [ ] Responsive design (375px → 1440px)
-- [ ] Accessible (WCAG AA)
 
 ### Out of Scope
 
@@ -63,11 +63,12 @@ Users can quickly and accurately total the fair market value of their donated it
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Hardcoded FMV over live API lookup | No API key friction for public users, simpler stack, charity guides don't change frequently | — Pending |
-| Standalone Vite app over Claude artifact | Full deployment flexibility, better for public tool | — Pending |
-| localStorage over session-only state | Users need data to survive browser close during multi-session tax prep | — Pending |
-| Current year only with future-year data model | Simplifies v1 while keeping upgrade path clean | — Pending |
+| Hardcoded FMV over live API lookup | No API key friction for public users, simpler stack, charity guides don't change frequently | ✓ Good |
+| Standalone Vite app over Claude artifact | Full deployment flexibility, better for public tool | ✓ Good |
+| localStorage over session-only state | Users need data to survive browser close during multi-session tax prep | ✓ Good |
+| Current year only with future-year data model | Simplifies v1 while keeping upgrade path clean | ✓ Good |
 | FMV range picker with suggested average | Users can adjust within range but get a sensible default | — Pending |
+| Separate FMV ranges per condition (not multipliers) | Direct lookup from Salvation Army guide, more defensible | ✓ Good |
 
 ## Evolution
 
@@ -87,4 +88,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-23 after initialization*
+*Last updated: 2026-03-24 after Phase 1: Foundation complete*
