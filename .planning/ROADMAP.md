@@ -62,7 +62,11 @@ Plans:
   3. Closing and reopening the browser restores all donation data exactly as left — zero data loss in a standard browsing session
   4. User can export a JSON backup file and re-import it to fully restore a previous session's data
   5. localStorage schema includes a version field and a migration path so future data shape changes do not silently corrupt existing user data
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Zod v4 schema guard, replaceAll store action, JSON backup export/import utilities and button components
+- [ ] 03-02-PLAN.md — PDF component tree with Form 8283 callouts, lazy-loaded ExportButton, wire all Phase 3 controls into App.tsx
 
 ## Progress
 
@@ -73,4 +77,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete   | 2026-03-24 |
 | 2. Core UI | 4/4 | Complete   | 2026-03-24 |
-| 3. Export and Persistence | 0/TBD | Not started | - |
+| 3. Export and Persistence | 0/2 | Not started | - |
