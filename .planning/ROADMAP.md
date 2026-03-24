@@ -28,7 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Zustand store accepts donation events and items, and all derived selectors (running total, category breakdown, threshold flags) return correct values when driven by test data
   4. App defaults to tax year 2025, and the year-keyed data structure requires only a single file change to add a future year
   5. localStorage write test runs on mount and a private-mode warning banner is visible when storage is unavailable
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Scaffold Vite project, FMV data module with resolveFMV(), TypeScript interfaces, localStorage detection
+- [ ] 01-02-PLAN.md — Zustand store with selectors and threshold logic, app shell UI with branding and empty state
 
 ### Phase 2: Core UI
 **Goal**: Users can find items, set condition and quantity, log multiple donation events, and see a live-updating deduction total with contextual IRS compliance flags — all on mobile and desktop
@@ -61,6 +65,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/2 | Planning complete | - |
 | 2. Core UI | 0/TBD | Not started | - |
 | 3. Export and Persistence | 0/TBD | Not started | - |
