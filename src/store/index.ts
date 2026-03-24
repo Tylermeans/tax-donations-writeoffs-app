@@ -22,6 +22,7 @@ export interface DonationStore extends PersistedState {
   setTaxYear: (year: number) => void
   addEvent: (event: Omit<DonationEvent, 'id' | 'items'>) => void
   removeEvent: (eventId: string) => void
+  updateEvent: (eventId: string, patch: Partial<Pick<DonationEvent, 'date' | 'organization'>>) => void
   addItem: (eventId: string, item: Omit<DonationItem, 'id'>) => void
   updateItem: (eventId: string, itemId: string, patch: Partial<DonationItem>) => void
   removeItem: (eventId: string, itemId: string) => void
@@ -58,6 +59,15 @@ export const useDonationStore = create<DonationStore>()(
       removeEvent: (eventId) =>
         set((state) => ({
           events: state.events.filter((e) => e.id !== eventId),
+        })),
+
+      // updateEvent: shallow-merges patch (date, organization) into the matching event.
+      // Used by EventHeader inline edit — avoids delete/re-add which would lose items.
+      updateEvent: (eventId, patch) =>
+        set((state) => ({
+          events: state.events.map((event) =>
+            event.id !== eventId ? event : { ...event, ...patch }
+          ),
         })),
 
       // addItem: finds the target event by eventId and appends the new item
