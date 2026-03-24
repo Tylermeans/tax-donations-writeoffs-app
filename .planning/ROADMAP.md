@@ -49,7 +49,7 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md — Item controls (ConditionToggle, FMVRangePicker, QuantityEditor) and ItemCard composite with compliance warnings
 - [x] 02-02-PLAN.md — TotalsDashboard with category/date breakdowns and ThresholdFlags for aggregate IRS compliance
-- [ ] 02-03-PLAN.md — DonationEventCard, DonationEventList, AddEventForm, and event management (create/edit/delete)
+- [x] 02-03-PLAN.md — DonationEventCard, DonationEventList, AddEventForm, and event management (create/edit/delete)
 - [ ] 02-04-PLAN.md — ItemSearch combobox, CatalogBrowser grid, App.tsx integration, and visual verification
 
 ### Phase 3: Export and Persistence

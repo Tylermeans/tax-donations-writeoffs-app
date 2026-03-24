@@ -19,12 +19,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Donation Log
 
-- [ ] **LOG-01**: User can create multiple donation events, each with a date and organization name
-- [ ] **LOG-02**: User can add items to a specific donation event
+- [x] **LOG-01**: User can create multiple donation events, each with a date and organization name
+- [x] **LOG-02**: User can add items to a specific donation event
 - [x] **LOG-03**: User can set quantity per item with inline +/- controls
 - [x] **LOG-04**: User can bulk-enter quantity for high-volume donations (e.g., 30 shirts)
 - [x] **LOG-05**: User can edit or remove items from a donation event
-- [ ] **LOG-06**: User can edit or delete entire donation events
+- [x] **LOG-06**: User can edit or delete entire donation events
 
 ### Dashboard & Compliance
 
@@ -102,12 +102,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ITEM-05 | Phase 2 | Complete |
 | ITEM-06 | Phase 2 | Complete |
 | ITEM-07 | Phase 2 | Complete |
-| LOG-01 | Phase 2 | Pending |
-| LOG-02 | Phase 2 | Pending |
+| LOG-01 | Phase 2 | Complete |
+| LOG-02 | Phase 2 | Complete |
 | LOG-03 | Phase 2 | Complete |
 | LOG-04 | Phase 2 | Complete |
 | LOG-05 | Phase 2 | Complete |
-| LOG-06 | Phase 2 | Pending |
+| LOG-06 | Phase 2 | Complete |
 | DASH-01 | Phase 2 | Complete |
 | DASH-02 | Phase 2 | Complete |
 | DASH-03 | Phase 2 | Complete |
