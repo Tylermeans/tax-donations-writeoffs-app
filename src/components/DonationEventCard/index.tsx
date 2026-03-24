@@ -21,6 +21,8 @@ import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import { isDeductible } from '../../store/selectors'
 import type { DonationEvent } from '../../store/types'
+import { CatalogBrowser } from '../ItemCatalog/CatalogBrowser'
+import { ItemSearch } from '../ItemCatalog/ItemSearch'
 import { ItemCard } from '../ItemCard'
 import { EventHeader } from './EventHeader'
 import { EventThresholdFlag } from './EventThresholdFlag'
@@ -69,11 +71,13 @@ export function DonationEventCard({ event, taxYear }: DonationEventCardProps) {
         </div>
       )}
 
-      {/* Plan 04 will render ItemSearch here when showItemPicker is true */}
+      {/* Item picker: search + catalog browse — toggled by the Add item button */}
       {showItemPicker && (
-        <div className="px-4 py-3 border-t border-brand-100">
-          {/* ItemSearch wired in Plan 04 */}
-          <p className="text-xs text-brand-500">Item search coming in next plan.</p>
+        <div className="px-4 py-3 border-t border-brand-100 flex flex-col gap-4">
+          {/* Type-ahead search — fastest path for users who know what they donated */}
+          <ItemSearch eventId={event.id} onItemAdded={() => setShowItemPicker(false)} />
+          {/* Category browser — for users who prefer to explore by type */}
+          <CatalogBrowser eventId={event.id} onItemAdded={() => setShowItemPicker(false)} />
         </div>
       )}
 

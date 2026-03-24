@@ -1,19 +1,24 @@
 /**
- * App — root component that wires together the store, storage detection,
- * and the app shell.
+ * App — root component assembling the full Phase 2 UI stack.
  *
- * Responsibilities:
- * 1. Detect localStorage availability on mount and show a warning banner if unavailable
- * 2. Read events from the Zustand store to decide whether to show EmptyState
- * 3. Render AppShell as the visual container for all content
+ * Layout order (per UI-SPEC Main Content Stack):
+ *   1. TotalsDashboard — aggregate FMV totals, category & date breakdowns
+ *   2. ThresholdFlags  — IRS compliance warnings ($250 / $500 / $5,000)
+ *   3. DonationEventList — event cards (or EmptyState when no events exist)
  *
- * Phase 2 will replace the placeholder "Donation events will appear here" div
- * with the real event list UI.
+ * TotalsDashboard and ThresholdFlags are suppressed until at least one
+ * donation event exists so the empty state is uncluttered.
+ *
+ * StorageWarningBanner renders outside AppShell (at root level) so it spans
+ * the full viewport width per the decision logged in STATE.md.
  */
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AppShell } from './components/AppShell'
 import { EmptyState } from './components/EmptyState'
 import { StorageWarningBanner } from './components/StorageWarningBanner'
+import { TotalsDashboard } from './components/TotalsDashboard'
+import { ThresholdFlags } from './components/TotalsDashboard/ThresholdFlags'
+import { DonationEventList } from './components/DonationEventList'
 import { detectLocalStorage } from './storage/detect'
 import { useDonationStore } from './store'
 
@@ -27,22 +32,25 @@ function App() {
     setStorageAvailable(detectLocalStorage())
   }, [])
 
-  // Read events from the store — when empty, show the getting-started guide
+  // Read events to decide whether to show the dashboard and event list or empty state
   const events = useDonationStore((state) => state.events)
+  const hasEvents = events.length > 0
 
   return (
     <>
       {/* Storage warning renders outside AppShell so it spans the full width */}
       {!storageAvailable && <StorageWarningBanner />}
       <AppShell>
-        {events.length === 0 ? (
-          <EmptyState />
-        ) : (
-          // Phase 2 will replace this placeholder with the real event list
-          <div className="text-brand-700 text-center py-4">
-            Donation events will appear here
-          </div>
-        )}
+        <div className="space-y-6">
+          {/* 1. TotalsDashboard — only when events exist */}
+          {hasEvents && <TotalsDashboard />}
+
+          {/* 2. ThresholdFlags — IRS warnings, conditional on thresholds being hit */}
+          {hasEvents && <ThresholdFlags />}
+
+          {/* 3. Event list OR empty state — never both */}
+          {hasEvents ? <DonationEventList /> : <EmptyState />}
+        </div>
       </AppShell>
     </>
   )
