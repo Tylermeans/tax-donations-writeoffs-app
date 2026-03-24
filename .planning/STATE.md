@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to execute
-stopped_at: Completed 01-foundation-01-PLAN.md
-last_updated: "2026-03-24T04:06:25.159Z"
+status: Phase complete — ready for verification
+stopped_at: Completed 01-foundation-02-PLAN.md
+last_updated: "2026-03-24T04:13:52.765Z"
 progress:
   total_phases: 3
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -47,6 +47,7 @@ Plan: 2 of 2
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 9 | 3 tasks | 18 files |
+| Phase 01-foundation P02 | 8m | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -63,6 +64,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: FMV data: each condition has own FMVRange (not multiplier) per D-02
 - [Phase 01-foundation]: defaultTaxYear() uses UTC date methods to avoid timezone-dependent test failures
 - [Phase 01-foundation]: MockStorage + Object.defineProperty for localStorage tests (vi.spyOn fails on vitest-4 jsdom)
+- [Phase 01-foundation]: Global MockStorage in test-setup.ts installed before module imports so Zustand persist middleware always finds functional Storage
+- [Phase 01-foundation]: StorageWarningBanner rendered outside AppShell at root level to span full viewport width
+- [Phase 01-foundation]: isDeductible uses > 500 (strictly greater than) per IRC 170(f)(16): poor items at exactly  are excluded
 
 ### Pending Todos
 
@@ -75,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T04:06:25.156Z
-Stopped at: Completed 01-foundation-01-PLAN.md
+Last session: 2026-03-24T04:13:52.762Z
+Stopped at: Completed 01-foundation-02-PLAN.md
 Resume file: None
