@@ -12,6 +12,6 @@ export default defineConfig({
         url: 'http://localhost/',
       },
     },
-    setupFiles: [],
+    setupFiles: ['./src/test-setup.ts'],
   },
 })
