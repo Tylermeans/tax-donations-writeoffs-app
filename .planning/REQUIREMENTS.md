@@ -11,19 +11,19 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **ITEM-01**: User can search items by name with type-ahead autocomplete across all categories (clothing, furniture, electronics, sporting goods, household, books/media/toys, instruments)
 - [ ] **ITEM-02**: User can browse items by category when not searching
-- [ ] **ITEM-03**: User sees FMV low/mid/high range for each item based on condition
-- [ ] **ITEM-04**: User can adjust FMV within the range via slider/picker, with average suggested as default
-- [ ] **ITEM-05**: User can toggle item condition (Poor/Good/Excellent) and FMV range updates accordingly
-- [ ] **ITEM-06**: User sees contextual IRS compliance notes per item category (e.g., electronics require depreciated value, IRS scrutiny higher)
-- [ ] **ITEM-07**: Poor-condition items display a warning that items must be in "good used condition or better" per IRC §170(f)(16) — non-deductible unless >$500 with qualified appraisal
+- [x] **ITEM-03**: User sees FMV low/mid/high range for each item based on condition
+- [x] **ITEM-04**: User can adjust FMV within the range via slider/picker, with average suggested as default
+- [x] **ITEM-05**: User can toggle item condition (Poor/Good/Excellent) and FMV range updates accordingly
+- [x] **ITEM-06**: User sees contextual IRS compliance notes per item category (e.g., electronics require depreciated value, IRS scrutiny higher)
+- [x] **ITEM-07**: Poor-condition items display a warning that items must be in "good used condition or better" per IRC §170(f)(16) — non-deductible unless >$500 with qualified appraisal
 
 ### Donation Log
 
 - [ ] **LOG-01**: User can create multiple donation events, each with a date and organization name
 - [ ] **LOG-02**: User can add items to a specific donation event
-- [ ] **LOG-03**: User can set quantity per item with inline +/- controls
-- [ ] **LOG-04**: User can bulk-enter quantity for high-volume donations (e.g., 30 shirts)
-- [ ] **LOG-05**: User can edit or remove items from a donation event
+- [x] **LOG-03**: User can set quantity per item with inline +/- controls
+- [x] **LOG-04**: User can bulk-enter quantity for high-volume donations (e.g., 30 shirts)
+- [x] **LOG-05**: User can edit or remove items from a donation event
 - [ ] **LOG-06**: User can edit or delete entire donation events
 
 ### Dashboard & Compliance
@@ -97,16 +97,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | ITEM-01 | Phase 2 | Pending |
 | ITEM-02 | Phase 2 | Pending |
-| ITEM-03 | Phase 2 | Pending |
-| ITEM-04 | Phase 2 | Pending |
-| ITEM-05 | Phase 2 | Pending |
-| ITEM-06 | Phase 2 | Pending |
-| ITEM-07 | Phase 2 | Pending |
+| ITEM-03 | Phase 2 | Complete |
+| ITEM-04 | Phase 2 | Complete |
+| ITEM-05 | Phase 2 | Complete |
+| ITEM-06 | Phase 2 | Complete |
+| ITEM-07 | Phase 2 | Complete |
 | LOG-01 | Phase 2 | Pending |
 | LOG-02 | Phase 2 | Pending |
-| LOG-03 | Phase 2 | Pending |
-| LOG-04 | Phase 2 | Pending |
-| LOG-05 | Phase 2 | Pending |
+| LOG-03 | Phase 2 | Complete |
+| LOG-04 | Phase 2 | Complete |
+| LOG-05 | Phase 2 | Complete |
 | LOG-06 | Phase 2 | Pending |
 | DASH-01 | Phase 2 | Complete |
 | DASH-02 | Phase 2 | Complete |

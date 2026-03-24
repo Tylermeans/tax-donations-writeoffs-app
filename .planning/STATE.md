@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Ready to execute
-stopped_at: Completed 02-core-ui-02-PLAN.md
-last_updated: "2026-03-24T12:48:22.207Z"
+stopped_at: Completed 02-core-ui 02-01-PLAN.md
+last_updated: "2026-03-24T12:48:49.831Z"
 progress:
   total_phases: 3
   completed_phases: 1
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-23)
 ## Current Position
 
 Phase: 02 (core-ui) — EXECUTING
-Plan: 2 of 4
+Plan: 3 of 4
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Plan: 2 of 4
 | Phase 01-foundation P01 | 9 | 3 tasks | 18 files |
 | Phase 01-foundation P02 | 8m | 2 tasks | 12 files |
 | Phase 02-core-ui P02 | 2 | 2 tasks | 4 files |
+| Phase 02-core-ui P01 | 20m | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 02-core-ui]: CategoryBreakdown/EventBreakdown receive props from TotalsDashboard parent (no independent store subscriptions — co-located data)
 - [Phase 02-core-ui]: UTC-safe date parsing (append T00:00:00) prevents timezone off-by-one-day display in EventBreakdown
 - [Phase 02-core-ui]: ThresholdFlags returns null when inactive — no empty wrapper nodes in DOM
+- [Phase 02-core-ui]: QuantityEditor uses local string state for direct input to allow multi-digit typing without premature clamping, committing to store on blur or Enter
+- [Phase 02-core-ui]: ItemCard sub-components own their own updateItem dispatch — parent only holds removeItem to avoid prop drilling
 
 ### Pending Todos
 
@@ -83,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T12:48:22.204Z
-Stopped at: Completed 02-core-ui-02-PLAN.md
+Last session: 2026-03-24T12:48:49.829Z
+Stopped at: Completed 02-core-ui 02-01-PLAN.md
 Resume file: None
