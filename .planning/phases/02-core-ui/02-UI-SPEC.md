@@ -106,9 +106,10 @@ Single column. Stacking order top-to-bottom:
 
 1. `TotalsDashboard` — sticky on desktop, top of flow on mobile
 2. `ThresholdFlags` — appears below dashboard when triggered
-3. `DonationEventList` — list of event cards
-4. "Add Donation Event" CTA — always visible at bottom of list
-5. `EmptyState` — replaces items 3–4 when no events exist
+3. `StorageWarningBanner` — appears below ThresholdFlags when localStorage quota is at risk (conditional)
+4. `DonationEventList` — list of event cards
+5. "Add Donation Event" CTA — always visible at bottom of list
+6. `EmptyState` — replaces items 4–5 when no events exist
 
 Gap between major sections: `space-y-6` (24px).
 
@@ -117,7 +118,7 @@ Gap between major sections: `space-y-6` (24px).
 ```
 bg-white border border-brand-100 rounded-xl p-6
   flex flex-col gap-2
-    Label: "2025 Deductible Total" — text-sm font-medium text-brand-500
+    Label: "{taxYear} Deductible Total" — text-sm font-medium text-brand-500
     Amount: tabular-nums text-3xl font-bold text-brand-800
     Subline: "across {n} donation event(s)" — text-sm text-brand-600
   [Category breakdown — collapsible on mobile, always visible md+]
@@ -150,14 +151,19 @@ bg-white border border-brand-100 rounded-xl overflow-hidden
 ### ItemCard
 
 ```
-flex items-start gap-3 py-3
-  Left: item name + category badge + IRS note (if present)
-  Right: FMV controls column
+// Mobile (< md): single column — name/badge above all controls
+flex flex-col gap-3 py-3
+  Top: item name + category badge + IRS note (if present)
+  Below: FMV controls (full width)
     ConditionToggle (full width)
     FMVRangePicker (full width)
-    QuantityEditor (inline, right-aligned)
-    Line total (tabular-nums text-sm font-semibold)
+    QuantityEditor (inline, left-aligned) + Line total (right-aligned)
       — strikethrough + red if poor condition
+
+// md+: two-column side-by-side
+md:flex-row md:items-start md:gap-4
+  Left column (flex-1): item name + category badge + IRS note
+  Right column (shrink-0 min-w-[160px]): all FMV controls stacked
 ```
 
 ---
@@ -182,18 +188,22 @@ flex items-start gap-3 py-3
     aria-label="Search donation items"
     aria-autocomplete="list"
     aria-controls="item-search-listbox"
+    aria-activedescendant={activeOptionId}   // e.g. "item-option-mens-jeans" or undefined when closed
   />
   <Search icon — absolute right-3 top-1/2 -translate-y-1/2 text-brand-400 size-4 aria-hidden />
   <ul id="item-search-listbox" role="listbox"
     className="absolute z-10 w-full mt-1 bg-white border border-brand-100 rounded-lg
                shadow-md overflow-y-auto max-h-64">
-    <li role="option" aria-selected className="px-3 py-2 text-sm hover:bg-brand-50 cursor-pointer">
+    // id scheme: "item-option-{item.slug}" where slug is kebab-case item identifier
+    <li id="item-option-{item.slug}" role="option" aria-selected className="px-3 py-2 text-sm hover:bg-brand-50 cursor-pointer">
       Item name
       <span className="text-xs text-brand-400 ml-1">Category</span>
     </li>
   </ul>
 </div>
 ```
+
+**`activeOptionId` management:** Set to `"item-option-{slug}"` of the focused option on ArrowDown/ArrowUp. Set to `undefined` when the dropdown is closed or no option is focused. This value is kept in local component state (not Zustand) and drives both `aria-activedescendant` on the input and the `bg-brand-50` highlight on the list item.
 
 **States:**
 - Empty (no query): input at rest, no dropdown
@@ -263,7 +273,7 @@ Categories (7 total, one button each): Clothing, Sporting Goods, Furniture, Elec
 **States:**
 - Poor selected: `bg-red-100 text-red-700 border-red-300` (visual signal of deductibility risk)
 - Good selected: `bg-brand-600 text-white`
-- Excellent selected: `bg-accent-500 text-white`
+- Excellent selected: `bg-brand-500 text-white`
 - Unselected segment: `bg-white text-brand-600 hover:bg-brand-50`
 
 **Behavior:** Selecting Poor immediately triggers the §170(f)(16) inline warning below the item card. FMV range updates synchronously via `resolveFMV()`.
@@ -279,10 +289,10 @@ Categories (7 total, one button each): Clothing, Sporting Goods, Furniture, Elec
 **Structure:**
 ```
 <div className="flex flex-col gap-1">
-  <div className="flex justify-between text-xs text-brand-400">
-    <span>${low} low</span>
+  <div className="flex justify-between text-xs">
+    <span className="text-brand-500">${low} low</span>
     <span className="font-medium text-brand-700">${selected} selected</span>
-    <span>${high} high</span>
+    <span className="text-brand-500">${high} high</span>
   </div>
   <input
     type="range"
@@ -357,13 +367,14 @@ Categories (7 total, one button each): Clothing, Sporting Goods, Furniture, Elec
 **Normal state:**
 ```
 <article aria-label="{item name}">
-  <div className="flex items-start justify-between gap-4">
-    [Left column — grow]
+  {/* Mobile: flex-col (stacked). md+: flex-row (side-by-side). */}
+  <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-4">
+    [Left column — md:flex-1]
       <h4 className="text-sm font-semibold text-brand-800">{name}</h4>
       <span className="text-xs text-brand-500 bg-brand-50 px-2 py-0.5 rounded-full">{category}</span>
       {irsNote && <p className="text-xs text-brand-500 mt-1">{irsNote}</p>}
 
-    [Right column — shrink-0 flex flex-col gap-2 min-w-[160px]]
+    [Right column — md:shrink-0 flex flex-col gap-2 md:min-w-[160px]]
       <ConditionToggle />
       <FMVRangePicker />
       <div className="flex items-center justify-between">
@@ -449,7 +460,7 @@ Appears directly below header, above items, when event total > $250:
   <AlertTriangle size={14} aria-hidden className="text-amber-500 mt-0.5 shrink-0" />
   <p className="text-xs text-amber-800">
     This donation exceeds $250 — a written acknowledgment from
-    {organization} is required for your tax records.
+    {organization || "the organization"} is required for your tax records.
   </p>
 </div>
 ```
@@ -461,15 +472,31 @@ Inline edit replaces header content:
 <div className="px-4 py-3 bg-brand-50 border-b border-brand-100 flex flex-col gap-3">
   <label className="flex flex-col gap-1">
     <span className="text-xs font-medium text-brand-600">Donation date</span>
-    <input type="date" className="h-9 px-3 border border-brand-200 rounded-lg text-sm ..." />
+    <input type="date"
+      className="h-9 px-3 border border-brand-200 rounded-lg text-sm text-brand-800 bg-white
+                 focus-visible:outline-none focus-visible:border-brand-500
+                 focus-visible:ring-2 focus-visible:ring-brand-500/20 cursor-pointer"
+    />
   </label>
   <label className="flex flex-col gap-1">
     <span className="text-xs font-medium text-brand-600">Organization name</span>
-    <input type="text" placeholder="e.g. Goodwill, Salvation Army" className="h-9 px-3 ..." />
+    <input type="text" placeholder="e.g. Goodwill, Salvation Army"
+      className="h-9 px-3 border border-brand-200 rounded-lg text-sm text-brand-800 bg-white
+                 placeholder:text-brand-400
+                 focus-visible:outline-none focus-visible:border-brand-500
+                 focus-visible:ring-2 focus-visible:ring-brand-500/20"
+    />
   </label>
   <div className="flex gap-2 justify-end">
-    <button className="... text-sm cursor-pointer">Cancel</button>
-    <button className="... bg-brand-600 text-white text-sm cursor-pointer">Save</button>
+    <button
+      className="px-3 py-1.5 text-sm text-brand-600 hover:text-brand-800 cursor-pointer
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 rounded"
+    >Cancel</button>
+    <button
+      className="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium
+                 rounded cursor-pointer transition-colors
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40"
+    >Save</button>
   </div>
 </div>
 ```
@@ -487,7 +514,37 @@ Inline edit replaces header content:
 
 ---
 
-### 8. AddEventForm
+### 8. DonationEventList
+
+**Purpose:** Wrapper that renders the ordered list of DonationEventCards plus the persistent "Add Donation Event" CTA (LOG-01)
+
+**Structure:**
+```
+<section aria-label="Donation events" className="flex flex-col gap-4">
+  // One DonationEventCard per event, stacked vertically with gap-4
+  {events.map(event => (
+    <DonationEventCard key={event.id} event={event} />
+  ))}
+
+  // "Add Donation Event" CTA — always rendered below the last card (or alone when empty)
+  <div className="flex justify-center pt-2">
+    <button
+      className="flex items-center gap-2 px-4 py-2.5 bg-accent-500 hover:bg-accent-600
+                 text-white text-sm font-medium rounded-lg cursor-pointer transition-colors"
+      aria-label="Add a new donation event"
+    >
+      <Plus size={16} aria-hidden />
+      Add Donation Event
+    </button>
+  </div>
+</section>
+```
+
+When `events.length === 0` the section is not rendered — `EmptyState` takes its place in the stacking order.
+
+---
+
+### 9. AddEventForm
 
 **Purpose:** Inline form to create a new donation event (LOG-01)
 
@@ -528,7 +585,7 @@ Inline edit replaces header content:
 
 ---
 
-### 9. TotalsDashboard
+### 10. TotalsDashboard
 
 **Purpose:** Live running total + category breakdown (DASH-01, DASH-02, DASH-03)
 
@@ -540,7 +597,7 @@ Inline edit replaces header content:
   className="bg-white border border-brand-100 rounded-xl p-6">
   <div className="flex items-baseline justify-between gap-4">
     <div>
-      <p className="text-sm font-medium text-brand-500 mb-1">2025 Deductible Total</p>
+      <p className="text-sm font-medium text-brand-500 mb-1">{taxYear} Deductible Total</p>
       <p className="text-3xl font-bold text-brand-800 tabular-nums" aria-live="polite" aria-atomic="true">
         ${grandTotal.toFixed(2)}
       </p>
@@ -585,7 +642,7 @@ Inline edit replaces header content:
 
 ---
 
-### 10. ThresholdFlags
+### 11. ThresholdFlags
 
 **Purpose:** Aggregate IRS compliance notices — $500 Form 8283 flag and named high-value item flag (DASH-05, DASH-06, DASH-07)
 
@@ -625,15 +682,22 @@ When multiple high-value items exist, render one flag per item.
 
 ---
 
-### 11. DeleteConfirmation
+### 12. DeleteConfirmation
 
 **Purpose:** Confirm destructive delete of an event or item (LOG-05, LOG-06)
 
 **Pattern:** Inline confirmation (no modal). After clicking Trash2, the button row is replaced with:
 ```
-<div className="flex items-center gap-2 text-sm" role="alert">
+// No role="alert" — use programmatic focus instead to avoid duplicate announcements.
+// On mount, focus is moved to the Delete confirm button via useEffect + ref.
+<div className="flex items-center gap-2 text-sm">
   <span className="text-red-700">Delete this {event | item}?</span>
-  <button className="px-3 py-1 bg-red-600 text-white text-sm rounded cursor-pointer hover:bg-red-700">
+  <button
+    ref={confirmRef}   // focus lands here on mount
+    className="px-3 py-1 bg-red-600 text-white text-sm rounded cursor-pointer hover:bg-red-700
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/40"
+    aria-label="Confirm delete"
+  >
     Delete
   </button>
   <button className="px-3 py-1 text-brand-600 text-sm hover:text-brand-800 cursor-pointer">
@@ -642,7 +706,7 @@ When multiple high-value items exist, render one flag per item.
 </div>
 ```
 
-No modal overlay. Inline replacement keeps focus context and avoids focus trap complexity.
+No modal overlay. Inline replacement with **programmatic focus** on the Delete button ensures screen readers announce it via the focused element's label, without the premature/double announcement that `role="alert"` can produce. When "Cancel" is pressed, focus returns to the Trash2 button.
 
 ---
 
@@ -716,7 +780,7 @@ The `transition-colors` class is already conditionally activated in `src/index.c
 | ThresholdFlags | `role="alert"` for immediate announcement |
 | Poor-condition warning | `role="alert"` for immediate announcement |
 | DonationEventCard | `<article>` with `aria-label="{org} — {date}"` |
-| Delete confirmation | `role="alert"` on the inline confirmation row |
+| Delete confirmation | Focus moved programmatically to confirm button on mount (no `role="alert"`) |
 | Date input | `aria-required="true"` + `aria-describedby` hint |
 
 ### Keyboard Navigation
@@ -793,7 +857,7 @@ All text must meet WCAG AA (4.5:1 for body, 3:1 for large text):
 
 | Element | Copy |
 |---------|------|
-| $250 per-event inline flag | "This donation exceeds $250 — a written acknowledgment from {organization} is required for your tax records." |
+| $250 per-event inline flag | "This donation exceeds $250 — a written acknowledgment from {organization \|\| "the organization"} is required for your tax records." |
 | $500 aggregate flag heading | "Form 8283 Section A required" |
 | $500 aggregate flag body | "Your total non-cash donations exceed $500. Attach Form 8283 Section A to your tax return. Your total: ${amount}." |
 | $5,000 item flag heading | "Qualified appraisal required" |
@@ -816,7 +880,7 @@ All text must meet WCAG AA (4.5:1 for body, 3:1 for large text):
 
 | Element | Copy |
 |---------|------|
-| Total label | "2025 Deductible Total" |
+| Total label | "{taxYear} Deductible Total" (taxYear from store, e.g. 2025) |
 | Event count subline | "across {n} donation event" / "across {n} donation events" |
 | Category breakdown heading | "By category" |
 | Date breakdown heading | "By date" |
