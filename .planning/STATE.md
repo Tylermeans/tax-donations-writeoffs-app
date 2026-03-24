@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to plan
-stopped_at: Phase 2 UI-SPEC approved
-last_updated: "2026-03-24T04:45:03.958Z"
+status: Ready to execute
+stopped_at: Completed 02-core-ui-02-PLAN.md
+last_updated: "2026-03-24T12:48:22.207Z"
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 6
+  completed_plans: 4
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-23)
 
 **Core value:** Users can quickly and accurately total the fair market value of their donated items so they claim the full deduction they're legally entitled to.
-**Current focus:** Phase 01 — foundation
+**Current focus:** Phase 02 — core-ui
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
+Phase: 02 (core-ui) — EXECUTING
+Plan: 2 of 4
 
 ## Performance Metrics
 
@@ -48,6 +48,7 @@ Plan: Not started
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 9 | 3 tasks | 18 files |
 | Phase 01-foundation P02 | 8m | 2 tasks | 12 files |
+| Phase 02-core-ui P02 | 2 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -67,6 +68,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Global MockStorage in test-setup.ts installed before module imports so Zustand persist middleware always finds functional Storage
 - [Phase 01-foundation]: StorageWarningBanner rendered outside AppShell at root level to span full viewport width
 - [Phase 01-foundation]: isDeductible uses > 500 (strictly greater than) per IRC 170(f)(16): poor items at exactly  are excluded
+- [Phase 02-core-ui]: CategoryBreakdown/EventBreakdown receive props from TotalsDashboard parent (no independent store subscriptions — co-located data)
+- [Phase 02-core-ui]: UTC-safe date parsing (append T00:00:00) prevents timezone off-by-one-day display in EventBreakdown
+- [Phase 02-core-ui]: ThresholdFlags returns null when inactive — no empty wrapper nodes in DOM
 
 ### Pending Todos
 
@@ -79,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T04:45:03.955Z
-Stopped at: Phase 2 UI-SPEC approved
-Resume file: .planning/phases/02-core-ui/02-UI-SPEC.md
+Last session: 2026-03-24T12:48:22.204Z
+Stopped at: Completed 02-core-ui-02-PLAN.md
+Resume file: None

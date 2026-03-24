@@ -28,13 +28,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Dashboard & Compliance
 
-- [ ] **DASH-01**: User sees a live-updating running total of all deductions as items are added/changed
-- [ ] **DASH-02**: User sees visual breakdown by donation date
-- [ ] **DASH-03**: User sees visual breakdown by item category
-- [ ] **DASH-04**: User sees contextual IRS threshold flag when a single donation event exceeds $250 (written acknowledgment from organization required)
-- [ ] **DASH-05**: User sees contextual IRS threshold flag when aggregate non-cash total exceeds $500 (Form 8283 Section A required)
-- [ ] **DASH-06**: User sees contextual IRS threshold flag when a single item exceeds $5,000 (qualified appraisal + Form 8283 Section B required)
-- [ ] **DASH-07**: Threshold flags appear contextually as totals change, not buried in help text
+- [x] **DASH-01**: User sees a live-updating running total of all deductions as items are added/changed
+- [x] **DASH-02**: User sees visual breakdown by donation date
+- [x] **DASH-03**: User sees visual breakdown by item category
+- [x] **DASH-04**: User sees contextual IRS threshold flag when a single donation event exceeds $250 (written acknowledgment from organization required)
+- [x] **DASH-05**: User sees contextual IRS threshold flag when aggregate non-cash total exceeds $500 (Form 8283 Section A required)
+- [x] **DASH-06**: User sees contextual IRS threshold flag when a single item exceeds $5,000 (qualified appraisal + Form 8283 Section B required)
+- [x] **DASH-07**: Threshold flags appear contextually as totals change, not buried in help text
 
 ### Export
 
@@ -108,13 +108,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LOG-04 | Phase 2 | Pending |
 | LOG-05 | Phase 2 | Pending |
 | LOG-06 | Phase 2 | Pending |
-| DASH-01 | Phase 2 | Pending |
-| DASH-02 | Phase 2 | Pending |
-| DASH-03 | Phase 2 | Pending |
-| DASH-04 | Phase 2 | Pending |
-| DASH-05 | Phase 2 | Pending |
-| DASH-06 | Phase 2 | Pending |
-| DASH-07 | Phase 2 | Pending |
+| DASH-01 | Phase 2 | Complete |
+| DASH-02 | Phase 2 | Complete |
+| DASH-03 | Phase 2 | Complete |
+| DASH-04 | Phase 2 | Complete |
+| DASH-05 | Phase 2 | Complete |
+| DASH-06 | Phase 2 | Complete |
+| DASH-07 | Phase 2 | Complete |
 | EXPO-01 | Phase 3 | Pending |
 | EXPO-02 | Phase 3 | Pending |
 | EXPO-03 | Phase 3 | Pending |

@@ -44,11 +44,11 @@ Plans:
   3. Poor-condition items under $500 display a strikethrough and an §170(f)(16) warning and are excluded from the deductible total
   4. User can create multiple donation events each with a date and organization name, add items to each event, and edit or delete items and entire events
   5. The running total panel updates live; the $250-per-event flag, $500-aggregate flag, and $5,000-per-item flag each appear at the correct threshold and are scoped correctly (per-event vs. aggregate)
-**Plans:** 4 plans
+**Plans:** 2/4 plans executed
 
 Plans:
-- [ ] 02-01-PLAN.md — Item controls (ConditionToggle, FMVRangePicker, QuantityEditor) and ItemCard composite with compliance warnings
-- [ ] 02-02-PLAN.md — TotalsDashboard with category/date breakdowns and ThresholdFlags for aggregate IRS compliance
+- [x] 02-01-PLAN.md — Item controls (ConditionToggle, FMVRangePicker, QuantityEditor) and ItemCard composite with compliance warnings
+- [x] 02-02-PLAN.md — TotalsDashboard with category/date breakdowns and ThresholdFlags for aggregate IRS compliance
 - [ ] 02-03-PLAN.md — DonationEventCard, DonationEventList, AddEventForm, and event management (create/edit/delete)
 - [ ] 02-04-PLAN.md — ItemSearch combobox, CatalogBrowser grid, App.tsx integration, and visual verification
 
@@ -72,5 +72,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete   | 2026-03-24 |
-| 2. Core UI | 0/4 | Planning complete | - |
+| 2. Core UI | 2/4 | In Progress|  |
 | 3. Export and Persistence | 0/TBD | Not started | - |
