@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Scaffold Vite project, FMV data module with resolveFMV(), TypeScript interfaces, localStorage detection
+- [x] 01-01-PLAN.md — Scaffold Vite project, FMV data module with resolveFMV(), TypeScript interfaces, localStorage detection
 - [ ] 01-02-PLAN.md — Zustand store with selectors and threshold logic, app shell UI with branding and empty state
 
 ### Phase 2: Core UI

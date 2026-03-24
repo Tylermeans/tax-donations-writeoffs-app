@@ -52,11 +52,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFR-01**: App defaults to current tax year (2025) with data model structured for future year updates
+- [x] **INFR-01**: App defaults to current tax year (2025) with data model structured for future year updates
 - [ ] **INFR-02**: App is responsive from 375px to 1440px (mobile-first)
 - [ ] **INFR-03**: App meets WCAG AA accessibility standards (contrast, focus states, aria labels, keyboard navigation)
-- [ ] **INFR-04**: No account or authentication required — fully client-side
-- [ ] **INFR-05**: FMV data sourced from Salvation Army/Goodwill valuation guides, clearly labeled as charity guide estimates (not "IRS FMV")
+- [x] **INFR-04**: No account or authentication required — fully client-side
+- [x] **INFR-05**: FMV data sourced from Salvation Army/Goodwill valuation guides, clearly labeled as charity guide estimates (not "IRS FMV")
 
 ## v2 Requirements
 
@@ -123,11 +123,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PERS-02 | Phase 3 | Pending |
 | PERS-03 | Phase 3 | Pending |
 | PERS-04 | Phase 3 | Pending |
-| INFR-01 | Phase 1 | Pending |
+| INFR-01 | Phase 1 | Complete |
 | INFR-02 | Phase 2 | Pending |
 | INFR-03 | Phase 2 | Pending |
-| INFR-04 | Phase 1 | Pending |
-| INFR-05 | Phase 1 | Pending |
+| INFR-04 | Phase 1 | Complete |
+| INFR-05 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 33 total
