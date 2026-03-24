@@ -9,8 +9,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Item Catalog
 
-- [ ] **ITEM-01**: User can search items by name with type-ahead autocomplete across all categories (clothing, furniture, electronics, sporting goods, household, books/media/toys, instruments)
-- [ ] **ITEM-02**: User can browse items by category when not searching
+- [x] **ITEM-01**: User can search items by name with type-ahead autocomplete across all categories (clothing, furniture, electronics, sporting goods, household, books/media/toys, instruments)
+- [x] **ITEM-02**: User can browse items by category when not searching
 - [x] **ITEM-03**: User sees FMV low/mid/high range for each item based on condition
 - [x] **ITEM-04**: User can adjust FMV within the range via slider/picker, with average suggested as default
 - [x] **ITEM-05**: User can toggle item condition (Poor/Good/Excellent) and FMV range updates accordingly
@@ -95,8 +95,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ITEM-01 | Phase 2 | Pending |
-| ITEM-02 | Phase 2 | Pending |
+| ITEM-01 | Phase 2 | Complete |
+| ITEM-02 | Phase 2 | Complete |
 | ITEM-03 | Phase 2 | Complete |
 | ITEM-04 | Phase 2 | Complete |
 | ITEM-05 | Phase 2 | Complete |

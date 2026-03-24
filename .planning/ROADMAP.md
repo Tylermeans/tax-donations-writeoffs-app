@@ -13,7 +13,7 @@ Three phases that take the app from a bare TypeScript skeleton to a fully deploy
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - FMV data module, TypeScript interfaces, Zustand store, and project scaffolding (completed 2026-03-24)
-- [ ] **Phase 2: Core UI** - Item catalog, donation log, running total dashboard, and IRS compliance flags
+- [x] **Phase 2: Core UI** - Item catalog, donation log, running total dashboard, and IRS compliance flags (completed 2026-03-24)
 - [ ] **Phase 3: Export and Persistence** - PDF export with Form 8283 annotations, localStorage persistence, and JSON backup
 
 ## Phase Details
@@ -44,13 +44,13 @@ Plans:
   3. Poor-condition items under $500 display a strikethrough and an §170(f)(16) warning and are excluded from the deductible total
   4. User can create multiple donation events each with a date and organization name, add items to each event, and edit or delete items and entire events
   5. The running total panel updates live; the $250-per-event flag, $500-aggregate flag, and $5,000-per-item flag each appear at the correct threshold and are scoped correctly (per-event vs. aggregate)
-**Plans:** 2/4 plans executed
+**Plans:** 4/4 plans complete
 
 Plans:
 - [x] 02-01-PLAN.md — Item controls (ConditionToggle, FMVRangePicker, QuantityEditor) and ItemCard composite with compliance warnings
 - [x] 02-02-PLAN.md — TotalsDashboard with category/date breakdowns and ThresholdFlags for aggregate IRS compliance
 - [x] 02-03-PLAN.md — DonationEventCard, DonationEventList, AddEventForm, and event management (create/edit/delete)
-- [ ] 02-04-PLAN.md — ItemSearch combobox, CatalogBrowser grid, App.tsx integration, and visual verification
+- [x] 02-04-PLAN.md — ItemSearch combobox, CatalogBrowser grid, App.tsx integration, and visual verification
 
 ### Phase 3: Export and Persistence
 **Goal**: Users can generate a PDF suitable for CPA handoff and their donation data survives browser close, with a JSON backup option guarding against localStorage loss
@@ -72,5 +72,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete   | 2026-03-24 |
-| 2. Core UI | 2/4 | In Progress|  |
+| 2. Core UI | 4/4 | Complete   | 2026-03-24 |
 | 3. Export and Persistence | 0/TBD | Not started | - |

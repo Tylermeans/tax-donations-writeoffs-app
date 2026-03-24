@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to execute
-stopped_at: Completed 02-core-ui 02-03-PLAN.md
-last_updated: "2026-03-24T12:54:20.234Z"
+status: Phase complete — ready for verification
+stopped_at: Completed 02-core-ui 02-04-PLAN.md
+last_updated: "2026-03-24T13:03:08.557Z"
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State
@@ -51,6 +51,7 @@ Plan: 4 of 4
 | Phase 02-core-ui P02 | 2 | 2 tasks | 4 files |
 | Phase 02-core-ui P01 | 20m | 2 tasks | 4 files |
 | Phase 02-core-ui P03 | 3min | 2 tasks | 7 files |
+| Phase 02-core-ui P04 | checkpoint-continuation | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,8 @@ Recent decisions affecting current work:
 - [Phase 02-core-ui]: updateEvent via shallow-merge not delete/re-add — preserves items during event date/org edit
 - [Phase 02-core-ui]: DeleteConfirmation uses programmatic focus (useRef+useEffect) not role=alert — moves AT users to confirm button position
 - [Phase 02-core-ui]: DonationEventList returns null when empty — App.tsx renders EmptyState at correct page-level spacing
+- [Phase 02-core-ui]: ItemSearch/CatalogBrowser embedded inline in DonationEventCard (not modal) — collapses via onItemAdded callback after item added
+- [Phase 02-core-ui]: Default condition 'good' with mid FMV on all catalog adds — aligns with IRS 'good used condition or better' deductibility requirement
 
 ### Pending Todos
 
@@ -90,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T12:54:20.231Z
-Stopped at: Completed 02-core-ui 02-03-PLAN.md
+Last session: 2026-03-24T13:03:08.555Z
+Stopped at: Completed 02-core-ui 02-04-PLAN.md
 Resume file: None
