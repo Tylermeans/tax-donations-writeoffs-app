@@ -12,6 +12,7 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import type { DonationEvent, DonationItem, PersistedState } from './types'
 import { defaultTaxYear } from '../data/fmv'
+import { PersistedStateSchema } from '../storage/schema'
 
 // ---------------------------------------------------------------------------
 // Store interface
@@ -26,6 +27,12 @@ export interface DonationStore extends PersistedState {
   addItem: (eventId: string, item: Omit<DonationItem, 'id'>) => void
   updateItem: (eventId: string, itemId: string, patch: Partial<DonationItem>) => void
   removeItem: (eventId: string, itemId: string) => void
+  /**
+   * Atomically replaces the entire data layer (taxYear + events) from an
+   * imported backup. Called by ImportBackupButton after Zod validation passes.
+   * schemaVersion is always reset to 1 (the only supported version in v1).
+   */
+  replaceAll: (state: Pick<PersistedState, 'taxYear' | 'events'>) => void
 }
 
 // ---------------------------------------------------------------------------
@@ -116,6 +123,15 @@ export const useDonationStore = create<DonationStore>()(
                 }
           ),
         })),
+
+      // replaceAll: atomically replaces the entire data layer from an imported backup.
+      // schemaVersion is always forced to 1 (the only schema version in v1).
+      replaceAll: (partial) =>
+        set(() => ({
+          taxYear: partial.taxYear,
+          events: partial.events,
+          schemaVersion: 1 as const,
+        })),
     }),
     {
       name: 'donation-itemizer',
@@ -127,10 +143,27 @@ export const useDonationStore = create<DonationStore>()(
         taxYear: state.taxYear,
         events: state.events,
       }),
-      // Placeholder migrate for future schema changes.
-      // When DonationItem fields change, increment `version` above and transform
-      // old persisted state here before it reaches the application.
-      migrate: (persistedState) => persistedState as DonationStore,
+      // Zod-guarded migrate: validates the raw localStorage value before hydrating.
+      // If the stored data fails validation (corrupt, stale schema version, or
+      // edited by a third-party tool), we reset to a clean empty state instead
+      // of crashing. The warning helps developers diagnose issues in DevTools.
+      // When DonationItem fields change in a future version, increment `version`
+      // above and add transformation logic here before the safeParse call.
+      migrate: (persistedState) => {
+        const result = PersistedStateSchema.safeParse(persistedState)
+        if (!result.success) {
+          console.warn(
+            '[DonationStore] localStorage data failed validation, resetting to empty state.',
+            result.error
+          )
+          return {
+            schemaVersion: 1 as const,
+            taxYear: defaultTaxYear(),
+            events: [],
+          } as unknown as DonationStore
+        }
+        return result.data as unknown as DonationStore
+      },
     }
   )
 )
