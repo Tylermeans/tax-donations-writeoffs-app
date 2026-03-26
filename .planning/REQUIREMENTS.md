@@ -45,10 +45,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Persistence
 
-- [ ] **PERS-01**: User's donation data persists in localStorage across browser sessions
-- [ ] **PERS-02**: localStorage schema includes version field for future migration support
-- [ ] **PERS-03**: User can export donation data as a JSON backup file (download)
-- [ ] **PERS-04**: User can import donation data from a previously exported JSON backup file
+- [x] **PERS-01**: User's donation data persists in localStorage across browser sessions
+- [x] **PERS-02**: localStorage schema includes version field for future migration support
+- [x] **PERS-03**: User can export donation data as a JSON backup file (download)
+- [x] **PERS-04**: User can import donation data from a previously exported JSON backup file
 
 ### Infrastructure
 
@@ -119,10 +119,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EXPO-02 | Phase 3 | Pending |
 | EXPO-03 | Phase 3 | Pending |
 | EXPO-04 | Phase 3 | Pending |
-| PERS-01 | Phase 3 | Pending |
-| PERS-02 | Phase 3 | Pending |
-| PERS-03 | Phase 3 | Pending |
-| PERS-04 | Phase 3 | Pending |
+| PERS-01 | Phase 3 | Complete |
+| PERS-02 | Phase 3 | Complete |
+| PERS-03 | Phase 3 | Complete |
+| PERS-04 | Phase 3 | Complete |
 | INFR-01 | Phase 1 | Complete |
 | INFR-02 | Phase 2 | Complete |
 | INFR-03 | Phase 2 | Complete |

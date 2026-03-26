@@ -65,7 +65,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Zod v4 schema guard, replaceAll store action, JSON backup export/import utilities and button components
+- [x] 03-01-PLAN.md — Zod v4 schema guard, replaceAll store action, JSON backup export/import utilities and button components
 - [ ] 03-02-PLAN.md — PDF component tree with Form 8283 callouts, lazy-loaded ExportButton, wire all Phase 3 controls into App.tsx
 
 ## Progress

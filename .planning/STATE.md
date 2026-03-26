@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to plan
-stopped_at: Completed 02-core-ui 02-04-PLAN.md
-last_updated: "2026-03-24T13:13:10.542Z"
+status: Ready to execute
+stopped_at: Completed 03-export-and-persistence 03-01-PLAN.md
+last_updated: "2026-03-26T18:38:48.754Z"
 progress:
   total_phases: 3
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 8
+  completed_plans: 7
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-23)
 
 **Core value:** Users can quickly and accurately total the fair market value of their donated items so they claim the full deduction they're legally entitled to.
-**Current focus:** Phase 02 — core-ui
+**Current focus:** Phase 03 — export-and-persistence
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
+Phase: 03 (export-and-persistence) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -52,6 +52,7 @@ Plan: Not started
 | Phase 02-core-ui P01 | 20m | 2 tasks | 4 files |
 | Phase 02-core-ui P03 | 3min | 2 tasks | 7 files |
 | Phase 02-core-ui P04 | checkpoint-continuation | 3 tasks | 4 files |
+| Phase 03-export-and-persistence P01 | 4min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -81,6 +82,8 @@ Recent decisions affecting current work:
 - [Phase 02-core-ui]: DonationEventList returns null when empty — App.tsx renders EmptyState at correct page-level spacing
 - [Phase 02-core-ui]: ItemSearch/CatalogBrowser embedded inline in DonationEventCard (not modal) — collapses via onItemAdded callback after item added
 - [Phase 02-core-ui]: Default condition 'good' with mid FMV on all catalog adds — aligns with IRS 'good used condition or better' deductibility requirement
+- [Phase 03-export-and-persistence]: Zod v4 safeParse in Zustand migrate callback resets to clean empty state on corrupt localStorage instead of crashing
+- [Phase 03-export-and-persistence]: replaceAll store action forces schemaVersion: 1 as const to prevent imported backups from setting an invalid version
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T13:03:08.555Z
-Stopped at: Completed 02-core-ui 02-04-PLAN.md
+Last session: 2026-03-26T18:38:48.751Z
+Stopped at: Completed 03-export-and-persistence 03-01-PLAN.md
 Resume file: None
