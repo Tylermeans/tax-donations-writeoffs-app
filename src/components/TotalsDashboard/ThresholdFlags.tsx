@@ -12,11 +12,13 @@
  * Returns null when neither flag is active so no empty wrapper renders in the DOM.
  */
 import { AlertTriangle } from 'lucide-react'
+import { useShallow } from 'zustand/react/shallow'
 import { useDonationStore } from '../../store/index'
 import { selectAggregateThresholdFlags, selectGrandTotal } from '../../store/selectors'
 
 export function ThresholdFlags() {
-  const flags = useDonationStore(selectAggregateThresholdFlags)
+  // useShallow prevents infinite re-renders — selectAggregateThresholdFlags returns a new object each call
+  const flags = useDonationStore(useShallow(selectAggregateThresholdFlags))
   const grandTotal = useDonationStore(selectGrandTotal)
 
   // No active flags → render nothing (avoids empty space in the layout)

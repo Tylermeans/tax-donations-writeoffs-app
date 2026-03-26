@@ -60,8 +60,8 @@ export function DonationEventList() {
     prevEventsLengthRef.current = events.length
   }, [events.length])
 
-  // Return null when empty — App.tsx renders EmptyState in this case
-  if (events.length === 0) return null
+  // When empty, still render the Add CTA so users can create their first event
+  // App.tsx renders EmptyState above this component
 
   return (
     <section aria-label="Donation events" className="flex flex-col gap-4">

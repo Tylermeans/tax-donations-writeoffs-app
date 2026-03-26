@@ -74,8 +74,9 @@ function App() {
             </div>
           </div>
 
-          {/* 4. Event list OR empty state — never both */}
-          {hasEvents ? <DonationEventList /> : <EmptyState />}
+          {/* 4. Empty state guide (when no events) + event list (always — it has the Add CTA) */}
+          {!hasEvents && <EmptyState />}
+          <DonationEventList />
         </div>
       </AppShell>
     </>

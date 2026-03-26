@@ -49,6 +49,26 @@ export function EmptyState() {
         </p>
       </div>
 
+      {/* Primary CTA — the most important action on the page */}
+      <div className="text-center mb-8">
+        <button
+          type="button"
+          onClick={() => {
+            // Find and click the "Add a new donation event" button rendered by DonationEventList
+            const addBtn = document.querySelector<HTMLButtonElement>(
+              '[aria-label="Add a new donation event"]'
+            )
+            if (addBtn) {
+              addBtn.scrollIntoView({ behavior: 'smooth', block: 'center' })
+              addBtn.click()
+            }
+          }}
+          className="inline-flex items-center gap-2 px-6 py-3 bg-accent-500 hover:bg-accent-600 text-white text-base font-semibold rounded-lg cursor-pointer transition-colors shadow-sm"
+        >
+          Get Started — Add Your First Donation
+        </button>
+      </div>
+
       {/* Vertical on mobile, horizontal on md+ */}
       <ol className="flex flex-col md:flex-row gap-4">
         {steps.map((step) => (

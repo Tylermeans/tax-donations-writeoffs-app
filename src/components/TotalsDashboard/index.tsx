@@ -9,6 +9,7 @@
  * through their event list.
  */
 import { DollarSign } from 'lucide-react'
+import { useShallow } from 'zustand/react/shallow'
 import { useDonationStore } from '../../store/index'
 import {
   selectGrandTotal,
@@ -19,12 +20,13 @@ import { CategoryBreakdown } from './CategoryBreakdown'
 import { EventBreakdown } from './EventBreakdown'
 
 export function TotalsDashboard() {
-  // Fine-grained subscriptions — each re-renders only when its slice changes
+  // selectGrandTotal returns a primitive (number) — safe without useShallow
   const grandTotal = useDonationStore(selectGrandTotal)
-  const byCategory = useDonationStore(selectTotalsByCategory)
+  // These selectors return new object/array references — useShallow prevents infinite re-renders
+  const byCategory = useDonationStore(useShallow(selectTotalsByCategory))
   const events = useDonationStore((s) => s.events)
   const taxYear = useDonationStore((s) => s.taxYear)
-  const eventFlags = useDonationStore(selectEventThresholdFlags)
+  const eventFlags = useDonationStore(useShallow(selectEventThresholdFlags))
 
   // Do not render before any data exists — EmptyState handles the zero-event state
   if (events.length === 0) return null
