@@ -10,16 +10,26 @@
  * Do NOT add transition/animate classes here.
  *
  * Returns null when neither flag is active so no empty wrapper renders in the DOM.
+ *
+ * Why useMemo: selectAggregateThresholdFlags returns a new object on every call.
+ * React 19 + Zustand useSyncExternalStore causes infinite loops with unstable refs.
  */
+import { useMemo } from 'react'
 import { AlertTriangle } from 'lucide-react'
-import { useShallow } from 'zustand/react/shallow'
 import { useDonationStore } from '../../store/index'
 import { selectAggregateThresholdFlags, selectGrandTotal } from '../../store/selectors'
 
 export function ThresholdFlags() {
-  // useShallow prevents infinite re-renders — selectAggregateThresholdFlags returns a new object each call
-  const flags = useDonationStore(useShallow(selectAggregateThresholdFlags))
-  const grandTotal = useDonationStore(selectGrandTotal)
+  const events = useDonationStore((s) => s.events)
+
+  const flags = useMemo(
+    () => selectAggregateThresholdFlags({ events } as Parameters<typeof selectAggregateThresholdFlags>[0]),
+    [events]
+  )
+  const grandTotal = useMemo(
+    () => selectGrandTotal({ events } as Parameters<typeof selectGrandTotal>[0]),
+    [events]
+  )
 
   // No active flags → render nothing (avoids empty space in the layout)
   if (!flags.requiresForm8283SectionA && !flags.requiresQualifiedAppraisal) {

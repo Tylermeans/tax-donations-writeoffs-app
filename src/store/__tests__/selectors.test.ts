@@ -46,9 +46,11 @@ function makeState(events: DonationStore['events']): DonationStore {
     setTaxYear: () => {},
     addEvent: () => {},
     removeEvent: () => {},
+    updateEvent: () => {},
     addItem: () => {},
     updateItem: () => {},
     removeItem: () => {},
+    replaceAll: () => {},
   }
 }
 

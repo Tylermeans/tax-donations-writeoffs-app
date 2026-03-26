@@ -7,9 +7,16 @@
  *
  * Sticky positioning on md+ keeps the total visible while the user scrolls
  * through their event list.
+ *
+ * Why useMemo instead of Zustand selectors directly:
+ * selectTotalsByCategory and selectEventThresholdFlags return new object/array
+ * references on every call. React 19's useSyncExternalStore does strict reference
+ * equality checks, so passing these selectors to useDonationStore() causes infinite
+ * re-render loops. We read raw state (events) from the store and derive values
+ * in useMemo — React's own memoization handles reference stability.
  */
+import { useMemo } from 'react'
 import { DollarSign } from 'lucide-react'
-import { useShallow } from 'zustand/react/shallow'
 import { useDonationStore } from '../../store/index'
 import {
   selectGrandTotal,
@@ -20,13 +27,23 @@ import { CategoryBreakdown } from './CategoryBreakdown'
 import { EventBreakdown } from './EventBreakdown'
 
 export function TotalsDashboard() {
-  // selectGrandTotal returns a primitive (number) — safe without useShallow
-  const grandTotal = useDonationStore(selectGrandTotal)
-  // These selectors return new object/array references — useShallow prevents infinite re-renders
-  const byCategory = useDonationStore(useShallow(selectTotalsByCategory))
+  // Read raw state — these are stable references from Zustand (same array/number between renders if unchanged)
   const events = useDonationStore((s) => s.events)
   const taxYear = useDonationStore((s) => s.taxYear)
-  const eventFlags = useDonationStore(useShallow(selectEventThresholdFlags))
+
+  // Derive computed values via useMemo — avoids infinite loop from new object refs
+  const grandTotal = useMemo(
+    () => selectGrandTotal({ events } as Parameters<typeof selectGrandTotal>[0]),
+    [events]
+  )
+  const byCategory = useMemo(
+    () => selectTotalsByCategory({ events } as Parameters<typeof selectTotalsByCategory>[0]),
+    [events]
+  )
+  const eventFlags = useMemo(
+    () => selectEventThresholdFlags({ events } as Parameters<typeof selectEventThresholdFlags>[0]),
+    [events]
+  )
 
   // Do not render before any data exists — EmptyState handles the zero-event state
   if (events.length === 0) return null

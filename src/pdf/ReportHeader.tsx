@@ -8,7 +8,6 @@
  * These are NOT input fields — they are static printed text with underscores.
  */
 import { View, Text } from '@react-pdf/renderer'
-import { formatDate } from './styles'
 
 interface ReportHeaderProps {
   taxYear: number
