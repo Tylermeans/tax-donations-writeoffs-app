@@ -1,18 +1,14 @@
 /**
  * ExportContent — the lazy boundary that loads @react-pdf/renderer on demand.
  *
- * This file is intentionally the ONLY non-pdf/ file that imports @react-pdf/renderer.
- * It lives behind a React.lazy() call in ExportButton.tsx, so the ~300KB library
- * is only downloaded when the user clicks "Export PDF" for the first time.
- *
- * Render states:
- * - loading: PDF generation in progress — show pulsing "Generating PDF..." text
- * - error: PDF generation failed — show error + retry button
- * - ready: show a download anchor styled as a primary button
+ * Uses pdf().toBlob() instead of usePDF() hook — the hook has known infinite
+ * loop issues with React 19's useSyncExternalStore. The imperative API is
+ * more reliable and gives us explicit control over the generation lifecycle.
  *
  * Export as default — required by React.lazy().
  */
-import { usePDF } from '@react-pdf/renderer'
+import { useEffect, useState } from 'react'
+import { pdf } from '@react-pdf/renderer'
 import { DonationReport } from '../../pdf/DonationReport'
 import { buildReportData } from '../../pdf/buildReportData'
 import { useDonationStore } from '../../store'
@@ -22,32 +18,60 @@ interface ExportContentProps {
 }
 
 export default function ExportContent({ onDone }: ExportContentProps) {
-  // Read the entire store state as a one-time snapshot for the PDF
-  const state = useDonationStore()
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [blobUrl, setBlobUrl] = useState<string | null>(null)
+  const [errorMsg, setErrorMsg] = useState('')
+
+  // Snapshot store state once on mount — not reactive (PDF is point-in-time)
+  const state = useDonationStore.getState()
   const reportData = buildReportData(state)
 
-  // usePDF renders the document and provides a blob URL to download
-  const [instance] = usePDF({ document: <DonationReport data={reportData} /> })
+  useEffect(() => {
+    let cancelled = false
 
-  if (instance.loading) {
+    async function generate() {
+      try {
+        console.log('[PDF] Starting generation...')
+        const blob = await pdf(<DonationReport data={reportData} />).toBlob()
+        if (cancelled) return
+        const url = URL.createObjectURL(blob)
+        console.log('[PDF] Generation complete, blob URL created')
+        setBlobUrl(url)
+        setStatus('ready')
+      } catch (err) {
+        if (cancelled) return
+        const msg = err instanceof Error ? err.message : String(err)
+        console.error('[PDF] Generation failed:', msg)
+        setErrorMsg(msg)
+        setStatus('error')
+      }
+    }
+
+    generate()
+
+    return () => {
+      cancelled = true
+      if (blobUrl) URL.revokeObjectURL(blobUrl)
+    }
+    // Run once on mount — reportData is a snapshot, not reactive
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (status === 'loading') {
     return (
-      // Pulsing animation is wrapped in @media (prefers-reduced-motion) via Tailwind
       <span className="text-sm text-brand-600 animate-pulse motion-reduce:animate-none">
         Generating PDF...
       </span>
     )
   }
 
-  if (instance.error) {
+  if (status === 'error') {
     return (
       <span className="text-sm text-red-600">
-        PDF generation failed.{' '}
+        PDF failed: {errorMsg}.{' '}
         <button
           type="button"
-          onClick={() => {
-            // Trigger re-mount to retry generation
-            onDone()
-          }}
+          onClick={onDone}
           className="underline cursor-pointer text-red-600 hover:text-red-800"
         >
           Try again
@@ -56,12 +80,14 @@ export default function ExportContent({ onDone }: ExportContentProps) {
     )
   }
 
-  // PDF is ready — render a download anchor styled as a primary button
   return (
     <a
-      href={instance.url ?? undefined}
+      href={blobUrl ?? undefined}
       download={`donations-${reportData.taxYear}.pdf`}
-      onClick={onDone}
+      onClick={() => {
+        // Small delay so the download starts before we unmount
+        setTimeout(onDone, 100)
+      }}
       className="
         inline-flex items-center gap-2
         px-4 py-2 rounded-md
