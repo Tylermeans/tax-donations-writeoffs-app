@@ -14,7 +14,7 @@
  * Layout: single-column on mobile, side-by-side left (name/category) and
  * right (controls) on md+ per UI-SPEC section 6.
  */
-import { AlertTriangle, X } from 'lucide-react'
+import { AlertTriangle, Trash2 } from 'lucide-react'
 import { useDonationStore } from '../../store'
 import { isDeductible } from '../../store/selectors'
 import type { DonationItem } from '../../store/types'
@@ -47,21 +47,11 @@ export function ItemCard({ eventId, item, taxYear }: ItemCardProps) {
   const isHighValue = deductible && lineTotal > 5000
 
   return (
-    <article aria-label={item.name} className="relative bg-white rounded-xl border border-brand-100 p-4">
-      {/* Remove button — top-right corner. Uses aria-label with item name for AT. */}
-      <button
-        type="button"
-        aria-label={`Remove ${item.name}`}
-        onClick={() => removeItem(eventId, item.id)}
-        className="absolute top-3 right-3 text-brand-400 hover:text-red-500 cursor-pointer transition-colors"
-      >
-        <X size={14} aria-hidden />
-      </button>
-
+    <article aria-label={item.name} className="bg-white rounded-xl border border-brand-100 p-4">
       {/* Main content row: left (meta) + right (controls) */}
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-4">
         {/* Left column — item name, category badge, optional IRS note */}
-        <div className="flex flex-col gap-1 md:flex-1 pr-6 md:pr-0">
+        <div className="flex flex-col gap-1 md:flex-1">
           <h4 className="text-sm font-semibold text-brand-800">{item.name}</h4>
 
           <span className="self-start text-xs text-brand-500 bg-brand-50 px-2 py-0.5 rounded-full">
@@ -130,6 +120,19 @@ export function ItemCard({ eventId, item, taxYear }: ItemCardProps) {
           </p>
         </aside>
       )}
+
+      {/* Remove button — dedicated button at the bottom, no overlap with content */}
+      <div className="mt-3 pt-3 border-t border-brand-100">
+        <button
+          type="button"
+          aria-label={`Remove ${item.name}`}
+          onClick={() => removeItem(eventId, item.id)}
+          className="flex items-center gap-1.5 text-xs font-medium text-red-500 hover:text-red-700 cursor-pointer transition-colors"
+        >
+          <Trash2 size={13} aria-hidden />
+          Remove
+        </button>
+      </div>
     </article>
   )
 }
