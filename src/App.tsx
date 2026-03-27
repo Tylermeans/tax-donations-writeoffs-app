@@ -32,7 +32,6 @@ function App() {
     return <WelcomeGate onAccept={() => setAccepted(true)} />
   }
 
-  const events = useDonationStore.getState().events
   return <MainApp storageAvailable={storageAvailable} />
 }
 
