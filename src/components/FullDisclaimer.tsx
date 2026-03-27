@@ -38,7 +38,7 @@ export function FullDisclaimer({ open, onClose }: FullDisclaimerProps) {
         // Close on backdrop click (click on <dialog> itself, not its children)
         if (e.target === dialogRef.current) onClose()
       }}
-      className="max-w-2xl w-full rounded-xl border border-brand-200 shadow-xl p-0 backdrop:bg-black/50"
+      className="max-w-2xl w-[calc(100%-2rem)] mx-auto rounded-xl border border-brand-200 shadow-xl p-0 backdrop:bg-black/50"
     >
       <div className="px-6 py-5 max-h-[80vh] overflow-y-auto">
         {/* Header */}
