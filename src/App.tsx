@@ -1,14 +1,9 @@
 /**
- * App — root component assembling the full UI stack.
+ * App — root component with welcome gate + main UI stack.
  *
- * Layout order (flipped per user request — events first, totals at bottom):
- *   1. EmptyState (when no events) + DonationEventList (always — has Add CTA)
- *   2. TotalsDashboard — aggregate FMV totals, category & date breakdowns
- *   3. ThresholdFlags — IRS compliance warnings ($250 / $500 / $5,000)
- *   4. Export toolbar — Export PDF, Save Backup, Restore Backup
- *
- * This puts the primary action (adding donations) at the top where users
- * land, and the summary/export controls at the bottom after they've entered data.
+ * First-time users see a WelcomeGate with intro + disclaimer acceptance.
+ * Acceptance is persisted in localStorage so returning users go straight
+ * to the app. If localStorage is unavailable, the gate shows every session.
  */
 import { useEffect, useState } from 'react'
 import { AppShell } from './components/AppShell'
@@ -20,16 +15,29 @@ import { DonationEventList } from './components/DonationEventList'
 import { ExportButton } from './components/ExportButton/ExportButton'
 import { ExportJSONButton } from './components/ExportJSONButton'
 import { ImportBackupButton } from './components/ImportBackupButton'
+import { WelcomeGate, hasAcceptedDisclaimer } from './components/WelcomeGate'
 import { detectLocalStorage } from './storage/detect'
 import { useDonationStore } from './store'
 
 function App() {
+  const [accepted, setAccepted] = useState(hasAcceptedDisclaimer)
   const [storageAvailable, setStorageAvailable] = useState(true)
 
   useEffect(() => {
     setStorageAvailable(detectLocalStorage())
   }, [])
 
+  // Show welcome gate until user accepts
+  if (!accepted) {
+    return <WelcomeGate onAccept={() => setAccepted(true)} />
+  }
+
+  const events = useDonationStore.getState().events
+  return <MainApp storageAvailable={storageAvailable} />
+}
+
+/** Main app content — separated so useDonationStore hook only mounts after acceptance */
+function MainApp({ storageAvailable }: { storageAvailable: boolean }) {
   const events = useDonationStore((state) => state.events)
   const hasEvents = events.length > 0
 
@@ -38,17 +46,12 @@ function App() {
       {!storageAvailable && <StorageWarningBanner />}
       <AppShell>
         <div className="space-y-6">
-          {/* 1. Empty state guide (when no events) + donation event list */}
           {!hasEvents && <EmptyState />}
           <DonationEventList />
 
-          {/* 2. Totals dashboard — only when events exist */}
           {hasEvents && <TotalsDashboard />}
-
-          {/* 3. IRS threshold flags — only when events exist */}
           {hasEvents && <ThresholdFlags />}
 
-          {/* 4. Export toolbar — at the bottom after all content */}
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap items-center gap-2">
               {hasEvents && <ExportButton />}
