@@ -3,30 +3,31 @@
 /**
  * Brand theme tokens for the Donation Itemizer.
  *
- * Warm blues/greens palette (D-07) using OKLCH for perceptually uniform scaling.
- * - brand-*: primary brand blue-teal (used for header, links, interactive elements)
- * - accent-*: green accent (used for positive actions like "add", "export")
- * - warm-*: off-white warm backgrounds (page background, card surfaces)
+ * Warm teal-green palette (D-05: warm & approachable, D-07: blues & greens).
+ * Shifted from cold blue-teal (hue 200) to a warmer green-teal (hue 170)
+ * for a friendlier, more inviting feel. Accent is a confident emerald green
+ * that contrasts well against white and the warm backgrounds.
  *
- * These tokens map to Tailwind utility classes:
- *   bg-brand-600, text-brand-100, border-brand-200, etc.
+ * - brand-*: warm teal (header, text, interactive elements)
+ * - accent-*: emerald green (CTAs, positive actions like "add", "export")
+ * - warm-*: cream/off-white backgrounds
  */
 @theme {
-  --color-brand-50: oklch(0.97 0.01 220);
-  --color-brand-100: oklch(0.93 0.02 220);
-  --color-brand-200: oklch(0.87 0.04 220);
-  --color-brand-300: oklch(0.78 0.06 210);
-  --color-brand-400: oklch(0.68 0.08 205);
-  --color-brand-500: oklch(0.58 0.10 200);
-  --color-brand-600: oklch(0.50 0.11 200);
-  --color-brand-700: oklch(0.42 0.10 200);
-  --color-brand-800: oklch(0.35 0.08 200);
-  --color-brand-900: oklch(0.28 0.06 200);
-  --color-accent-400: oklch(0.72 0.12 155);
-  --color-accent-500: oklch(0.62 0.14 155);
-  --color-accent-600: oklch(0.52 0.13 155);
-  --color-warm-50: oklch(0.98 0.005 80);
-  --color-warm-100: oklch(0.96 0.01 80);
+  --color-brand-50: oklch(0.97 0.01 170);
+  --color-brand-100: oklch(0.93 0.03 170);
+  --color-brand-200: oklch(0.87 0.05 170);
+  --color-brand-300: oklch(0.78 0.07 170);
+  --color-brand-400: oklch(0.66 0.09 170);
+  --color-brand-500: oklch(0.55 0.11 170);
+  --color-brand-600: oklch(0.47 0.10 168);
+  --color-brand-700: oklch(0.40 0.09 168);
+  --color-brand-800: oklch(0.33 0.07 168);
+  --color-brand-900: oklch(0.26 0.05 168);
+  --color-accent-400: oklch(0.70 0.16 160);
+  --color-accent-500: oklch(0.58 0.16 160);
+  --color-accent-600: oklch(0.48 0.14 160);
+  --color-warm-50: oklch(0.98 0.008 75);
+  --color-warm-100: oklch(0.96 0.015 75);
 }
 
 /**
@@ -35,7 +36,7 @@
  */
 *:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px oklch(0.58 0.10 200); /* brand-500 */
+  box-shadow: 0 0 0 2px oklch(0.55 0.11 170); /* brand-500 */
 }
 
 /**
