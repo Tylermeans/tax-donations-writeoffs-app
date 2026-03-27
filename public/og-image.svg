@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#f0faf8"/>
+
+  <!-- Header bar -->
+  <rect width="1200" height="180" fill="#1a7a6d"/>
+
+  <!-- App name -->
+  <text x="600" y="85" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700" fill="white">Donation Itemizer</text>
+  <text x="600" y="130" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#a7e8de">Know what your donations are worth.</text>
+
+  <!-- Feature cards -->
+  <!-- Card 1 -->
+  <rect x="60" y="220" width="340" height="140" rx="12" fill="white" stroke="#d1e8e4" stroke-width="1"/>
+  <text x="80" y="265" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#1a5c52">Track Donations</text>
+  <text x="80" y="295" font-family="system-ui, sans-serif" font-size="15" fill="#4a7a72">Search 80+ items across</text>
+  <text x="80" y="315" font-family="system-ui, sans-serif" font-size="15" fill="#4a7a72">7 categories with FMV estimates</text>
+
+  <!-- Card 2 -->
+  <rect x="430" y="220" width="340" height="140" rx="12" fill="white" stroke="#d1e8e4" stroke-width="1"/>
+  <text x="450" y="265" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#1a5c52">IRS Compliance</text>
+  <text x="450" y="295" font-family="system-ui, sans-serif" font-size="15" fill="#4a7a72">Automatic threshold alerts for</text>
+  <text x="450" y="315" font-family="system-ui, sans-serif" font-size="15" fill="#4a7a72">$250, $500, and $5,000 limits</text>
+
+  <!-- Card 3 -->
+  <rect x="800" y="220" width="340" height="140" rx="12" fill="white" stroke="#d1e8e4" stroke-width="1"/>
+  <text x="820" y="265" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#1a5c52">Export PDF</text>
+  <text x="820" y="295" font-family="system-ui, sans-serif" font-size="15" fill="#4a7a72">Download a formatted report</text>
+  <text x="820" y="315" font-family="system-ui, sans-serif" font-size="15" fill="#4a7a72">ready for your tax preparer</text>
+
+  <!-- Bottom tagline -->
+  <text x="600" y="450" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#1a5c52">Free Charitable Donation Tax Deduction Calculator</text>
+  <text x="600" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#4a7a72">100% free · No account needed · Runs in your browser · No data leaves your device</text>
+
+  <!-- Disclaimer -->
+  <text x="600" y="580" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8aaba5">Not tax advice. Values are estimates from published charity valuation guides.</text>
+  <text x="600" y="600" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8aaba5">Consult a qualified tax professional before claiming deductions.</text>
+</svg>

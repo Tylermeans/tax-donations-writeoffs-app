@@ -43,15 +43,47 @@ export function AppShell({ children }: AppShellProps) {
           <p className="text-xs text-brand-500">
             Donation Itemizer is a free tool. No data leaves your browser.
           </p>
-          <button
-            type="button"
-            onClick={() => setShowDisclaimer(true)}
-            className="text-xs font-medium text-brand-600 hover:text-brand-800 underline cursor-pointer transition-colors"
-          >
-            Disclaimer &amp; Terms of Use
-          </button>
+          <p className="text-xs text-brand-500">
+            FMV values sourced from Salvation Army Valuation Guide · Last verified January 2025
+          </p>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowDisclaimer(true)}
+              className="text-xs font-medium text-brand-600 hover:text-brand-800 underline cursor-pointer transition-colors"
+            >
+              Disclaimer &amp; Terms of Use
+            </button>
+            <span className="text-brand-300">·</span>
+            <a
+              href="https://github.com/Tylermeans/tax-donations-writeoffs-app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-brand-600 hover:text-brand-800 underline cursor-pointer transition-colors"
+            >
+              GitHub
+            </a>
+            <span className="text-brand-300">·</span>
+            <a
+              href="https://github.com/Tylermeans/tax-donations-writeoffs-app/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-brand-600 hover:text-brand-800 underline cursor-pointer transition-colors"
+            >
+              Report an Issue
+            </a>
+          </div>
           <p className="text-xs text-brand-400">
-            &copy; {new Date().getFullYear()} — Not tax advice. Use at your own risk.
+            Built by{' '}
+            <a
+              href="https://github.com/Tylermeans"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-500 hover:text-brand-700 underline cursor-pointer transition-colors"
+            >
+              Tyler Means
+            </a>
+            {' '}&copy; {new Date().getFullYear()} — Not tax advice. Use at your own risk.
           </p>
         </div>
       </footer>
