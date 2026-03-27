@@ -1,29 +1,22 @@
 /**
  * AppShell — single-column layout wrapper for the entire application.
  *
- * Per D-06: single column, max-w-2xl to keep content readable at all widths.
- * Per D-08/D-09: "Donation Itemizer" h1 heading + "Know what your donations
- * are worth." tagline in the header.
- *
- * The LegalDisclaimer is rendered directly inside the shell (not passed as
- * a slot) because it's always visible and is part of the visual foundation
- * rather than page-specific content.
- *
- * Accessibility:
- * - <header> and <main> landmarks are present for screen reader navigation
- * - Heading hierarchy: h1 in header, children use h2+ for their headings
- * - Color contrast: brand-700 on warm-50 background meets WCAG AA 4.5:1
+ * Includes header, legal disclaimer banner, main content area, and footer
+ * with a link to the full legal disclaimer modal.
  */
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { LegalDisclaimer } from './LegalDisclaimer'
+import { FullDisclaimer } from './FullDisclaimer'
 
 interface AppShellProps {
   children: ReactNode
 }
 
 export function AppShell({ children }: AppShellProps) {
+  const [showDisclaimer, setShowDisclaimer] = useState(false)
+
   return (
-    <div className="min-h-screen bg-warm-50">
+    <div className="min-h-screen bg-warm-50 flex flex-col">
       <header className="bg-brand-600 text-white">
         <div className="max-w-2xl mx-auto px-4 md:px-6 lg:px-8 py-6 text-center">
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
@@ -35,14 +28,36 @@ export function AppShell({ children }: AppShellProps) {
         </div>
       </header>
 
-      {/* Legal disclaimer is always visible below the header — per D-16 */}
+      {/* Legal disclaimer banner — always visible below header */}
       <div className="px-4 md:px-6 lg:px-8">
         <LegalDisclaimer />
       </div>
 
-      <main className="max-w-2xl mx-auto px-4 md:px-6 lg:px-8 py-8">
+      <main className="max-w-2xl mx-auto px-4 md:px-6 lg:px-8 py-8 flex-1 w-full">
         {children}
       </main>
+
+      {/* Footer with disclaimer link */}
+      <footer className="bg-brand-50 border-t border-brand-100 mt-auto">
+        <div className="max-w-2xl mx-auto px-4 md:px-6 lg:px-8 py-4 flex flex-col items-center gap-2 text-center">
+          <p className="text-xs text-brand-500">
+            Donation Itemizer is a free tool. No data leaves your browser.
+          </p>
+          <button
+            type="button"
+            onClick={() => setShowDisclaimer(true)}
+            className="text-xs font-medium text-brand-600 hover:text-brand-800 underline cursor-pointer transition-colors"
+          >
+            Disclaimer &amp; Terms of Use
+          </button>
+          <p className="text-xs text-brand-400">
+            &copy; {new Date().getFullYear()} — Not tax advice. Use at your own risk.
+          </p>
+        </div>
+      </footer>
+
+      {/* Full disclaimer modal */}
+      <FullDisclaimer open={showDisclaimer} onClose={() => setShowDisclaimer(false)} />
     </div>
   )
 }
