@@ -7,9 +7,12 @@
     <!-- Primary Meta -->
     <title>Donation Itemizer — Free Charitable Donation Tax Deduction Calculator</title>
     <meta name="description" content="Track non-cash charitable donations, get fair market value estimates from IRS-referenced guides, and export a PDF summary for your tax preparer. Free, private, no account needed." />
+    <meta name="author" content="Tyler Means" />
+    <meta name="application-name" content="Donation Itemizer" />
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Donation Itemizer" />
     <meta property="og:title" content="Donation Itemizer — Free Charitable Donation Tax Deduction Calculator" />
     <meta property="og:description" content="Track non-cash charitable donations, get fair market value estimates, and export a PDF summary for your tax preparer. 100% free, runs in your browser." />
     <meta property="og:url" content="https://tylermeans.github.io/tax-donations-writeoffs-app/" />
@@ -22,12 +25,166 @@
     <!-- SEO -->
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://tylermeans.github.io/tax-donations-writeoffs-app/" />
-    <meta name="keywords" content="donation calculator, charitable donation deduction, fair market value, tax write-off, IRS Form 8283, Goodwill donation value, Salvation Army valuation, non-cash donation tracker, tax deduction estimator" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/tax-donations-writeoffs-app/favicon.svg" />
+
+    <!-- Structured Data — WebSite + WebApplication + SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://tylermeans.github.io/tax-donations-writeoffs-app/#website",
+          "name": "Donation Itemizer",
+          "url": "https://tylermeans.github.io/tax-donations-writeoffs-app/",
+          "description": "Free charitable donation tax deduction calculator. Track non-cash donations, get fair market value estimates, and export a PDF summary for your tax preparer.",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://tylermeans.github.io/tax-donations-writeoffs-app/#app",
+          "name": "Donation Itemizer",
+          "url": "https://tylermeans.github.io/tax-donations-writeoffs-app/",
+          "description": "Track non-cash charitable donations, get fair market value estimates from the Salvation Army Valuation Guide, and export a PDF summary for your tax preparer. 100% free, runs entirely in your browser, no account required.",
+          "applicationCategory": "FinanceApplication",
+          "applicationSubCategory": "Tax Tool",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript. Works in any modern browser.",
+          "permissions": "none",
+          "isAccessibleForFree": true,
+          "inLanguage": "en-US",
+          "featureList": [
+            "Non-cash charitable donation tracking",
+            "Fair market value estimates from published charity valuation guides",
+            "IRS Form 8283 threshold alerts ($250, $500, $5,000)",
+            "PDF export for tax preparers",
+            "JSON backup and restore",
+            "100% browser-based — no data leaves your device"
+          ],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "isPartOf": {
+            "@id": "https://tylermeans.github.io/tax-donations-writeoffs-app/#website"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://tylermeans.github.io/tax-donations-writeoffs-app/#software",
+          "name": "Donation Itemizer",
+          "url": "https://tylermeans.github.io/tax-donations-writeoffs-app/",
+          "description": "Free non-cash charitable donation tracker and fair market value calculator for US tax deduction purposes. Exports PDF summaries for IRS Form 8283 reporting.",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Web",
+          "softwareVersion": "1.0.0",
+          "isAccessibleForFree": true,
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "US taxpayers who make non-cash charitable donations"
+          },
+          "isPartOf": {
+            "@id": "https://tylermeans.github.io/tax-donations-writeoffs-app/#website"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!--
+      Static pre-rendered content for search engines and AI crawlers.
+      Hidden from sighted users (React app renders over it), but fully
+      crawlable by Googlebot, Bingbot, GPTBot, ClaudeBot, PerplexityBot.
+      This solves the SPA indexability problem — crawlers that don't execute
+      JavaScript (or that hit the WelcomeGate) still see meaningful content.
+    -->
+    <div id="seo-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+      <h1>Donation Itemizer — Free Charitable Donation Tax Deduction Calculator</h1>
+      <p>
+        Donation Itemizer is a free browser-based tool that helps you track non-cash
+        charitable donations and estimate their fair market value (FMV) for tax deduction
+        purposes. Search hundreds of items, get value estimates from the Salvation Army and
+        Goodwill valuation guides, and export a formatted PDF summary for your tax preparer.
+      </p>
+
+      <h2>How It Works</h2>
+      <ol>
+        <li><strong>Add a donation date</strong> — Record each trip to Goodwill, Salvation Army, or any 501(c)(3) organization with the date and organization name.</li>
+        <li><strong>Search for donated items</strong> — Browse or search hundreds of items across 7 categories: clothing, furniture, electronics, sporting goods, household items, books and media, and musical instruments. Each item shows a fair market value range based on condition.</li>
+        <li><strong>Set condition and quantity</strong> — Toggle between Poor, Good, and Excellent condition. Adjust the FMV within the published range using a slider. Set quantities for multiple identical items.</li>
+        <li><strong>Review your deduction total</strong> — See a live-updating running total with breakdowns by category and donation date. IRS threshold flags alert you when you need Form 8283 or a qualified appraisal.</li>
+        <li><strong>Export a PDF summary</strong> — Download a formatted report with all donation events, itemized values, and Form 8283 field references, ready to hand to your CPA or attach to your tax return.</li>
+      </ol>
+
+      <h2>IRS Compliance Thresholds</h2>
+      <p>Donation Itemizer automatically flags when your donations cross key IRS thresholds:</p>
+      <ul>
+        <li><strong>Over $250 per donation event</strong> — Written acknowledgment from the receiving organization is required (per-event, not aggregate).</li>
+        <li><strong>Over $500 total non-cash donations</strong> — Form 8283 Section A must be attached to your tax return.</li>
+        <li><strong>Over $5,000 for a single item</strong> — A qualified appraisal is required and must be attached to Form 8283 Section B.</li>
+        <li><strong>Items in poor condition</strong> — Generally not deductible under IRC Section 170(f)(16) unless valued over $500 with a qualified appraisal.</li>
+      </ul>
+
+      <h2>Fair Market Value Sources</h2>
+      <p>
+        FMV estimates in Donation Itemizer are sourced from the Salvation Army Valuation
+        Guide and Goodwill Industries donation value guides. These are published charity
+        valuation references — they are not IRS-determined or IRS-endorsed values. The IRS
+        defines fair market value in Publication 561 as "the price that property would sell
+        for on the open market." Always consult a qualified tax professional to verify values
+        before claiming deductions on your tax return.
+      </p>
+
+      <h2>Item Categories</h2>
+      <p>Track donations across these categories with condition-specific FMV ranges:</p>
+      <ul>
+        <li><strong>Clothing</strong> — Shirts, pants, dresses, outerwear, shoes, accessories, suits, sweaters, and more</li>
+        <li><strong>Sporting Goods</strong> — Skis, bicycles, golf clubs, tennis rackets, exercise equipment, camping gear</li>
+        <li><strong>Furniture</strong> — Sofas, tables, chairs, bed frames, dressers, desks, bookshelves, lamps</li>
+        <li><strong>Electronics</strong> — Smartphones, laptops, monitors, tablets, TVs, gaming consoles (higher IRS scrutiny — depreciated value applies)</li>
+        <li><strong>Household</strong> — Kitchenware, linens, towels, rugs, picture frames, decorative items</li>
+        <li><strong>Books &amp; Media</strong> — Hardcover and paperback books, DVDs, board games, toys</li>
+        <li><strong>Instruments</strong> — Guitars, keyboards, and other musical instruments</li>
+      </ul>
+
+      <h2>Privacy &amp; Data</h2>
+      <p>
+        Donation Itemizer runs 100% in your web browser. No data is ever sent to a server.
+        Your donation information is stored locally on your device using browser localStorage.
+        No account, no sign-up, no tracking. You can export a JSON backup of your data at
+        any time and restore it on any device.
+      </p>
+
+      <h2>Important Disclaimer</h2>
+      <p>
+        Donation Itemizer is an informational tool only. It does not provide tax advice,
+        legal advice, or financial advice. Values shown are estimates from published charity
+        valuation guides and may not reflect actual fair market value. You are solely
+        responsible for the accuracy of values claimed on your tax return. Always consult a
+        qualified tax professional before claiming deductions. See the full Disclaimer and
+        Terms of Use within the application.
+      </p>
+    </div>
+
+    <!-- Fallback for users/crawlers with JavaScript disabled -->
+    <noscript>
+      <div style="max-width:600px;margin:40px auto;padding:20px;font-family:system-ui,sans-serif;text-align:center;">
+        <h1>Donation Itemizer</h1>
+        <p>Free charitable donation tax deduction calculator.</p>
+        <p>This application requires JavaScript to run. Please enable JavaScript in your browser settings and reload the page.</p>
+      </div>
+    </noscript>
+
+    <!-- React app root -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tylermeans.github.io/tax-donations-writeoffs-app/sitemap.xml
